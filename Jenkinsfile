@@ -8,16 +8,16 @@ pipeline {
             }
         }
 
-        stage('Run Python') {
-            steps {
-                sh 'python3 hello.py'
-            }
-        }
-
-        stage('Inspect') {
+         stage('Inspect') {
             steps {
                 sh 'pwd'
                 sh 'ls'
+            }
+        }
+
+        stage('Run Python') {
+            steps {
+                sh 'python3 hello.py'
             }
         }
     }
