@@ -20,6 +20,12 @@ pipeline {
             }
         }
         
+        stage('Test Build Info') {
+            steps {
+                sh 'python3 build-info.py | grep -q "This is the file I made for my test"'
+            }
+        }
+
         stage('Run Build Info') {
             steps {
                 sh 'python3 build-info.py'
