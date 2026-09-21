@@ -13,5 +13,12 @@ pipeline {
                 sh 'python3 hello.py'
             }
         }
+
+        stage('Inspect') {
+            steps {
+                sh 'pwd'
+                sh 'ls'
+            }
+        }
     }
 }
