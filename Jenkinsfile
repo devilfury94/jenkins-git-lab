@@ -8,13 +8,7 @@ pipeline {
             }
         }
 
-         stage('Files') {
-            steps {
-                sh 'ls'
-            }
-        }
-
-        stage('Test') {
+         stage('Test Hello') {
             steps {
                 sh 'python3 hello.py | grep -q "Hello from GitHub - version 2"'
             }
@@ -26,7 +20,7 @@ pipeline {
             }
         }
 
-        stage('Run Build Info') {
+        stage('Build') {
             steps {
                 sh 'python3 build-info.py'
             }
