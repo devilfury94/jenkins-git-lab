@@ -7,5 +7,10 @@ pipeline {
           sh 'echo "Hello Pipeline"'
         }
       }
+
+      stage('Run Python') {
+          steps {
+              sh 'python3 hello.py'
+          }
     }
 }
