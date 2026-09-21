@@ -14,10 +14,17 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                sh 'python3 hello.py | grep -q "Hello from GitHub - version 2"'
+            }
+        }
+        
         stage('Run Build Info') {
             steps {
                 sh 'python3 build-info.py'
             }
         }
+
     }
 }
