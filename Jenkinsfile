@@ -16,7 +16,7 @@ pipeline {
         
         stage('Test Build Info') {
             steps {
-                sh 'python3 build-info.py | grep -q "This is the file I made for my test"'
+                sh 'python3 build-info.py | grep -q "Le zizi de Sarkozidane"'
             }
         }
 
