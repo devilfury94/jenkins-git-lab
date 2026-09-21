@@ -2,22 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Workspace') {
             steps {
-                sh 'echo "Hello Pipeline"'
+                sh 'pwd'
             }
         }
 
-         stage('Inspect') {
+         stage('Files') {
             steps {
-                sh 'pwd'
                 sh 'ls'
             }
         }
 
-        stage('Run Python') {
+        stage('Run Build Info') {
             steps {
-                sh 'python3 hello.py'
+                sh 'python3 build-info.py'
             }
         }
     }
