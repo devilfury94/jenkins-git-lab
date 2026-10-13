@@ -26,5 +26,9 @@ pipeline {
             }
         }
 
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t jenkins-docker-app:day25 .'
     }
 }
+
