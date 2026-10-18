@@ -28,9 +28,17 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t jenkins-docker-app:day25 .'
+                sh 'docker build -t jenkins-docker-app:day26 .'
             }
         }
+        
+       stage('Docker Run Test') {
+            steps {
+                sh 'docker run jenkins-docker-app:day26'
+                sh 'docker run jenkins-docker-app:day26 | grep -q "Hello from GitHub - version 2"'
+            }
+       }
     }
 }
+    
 
