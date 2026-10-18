@@ -4,4 +4,4 @@ RUN mkdir -p /app
 
 COPY hello.py /app/hello.py
 
-CMD ["python3", "/app/helo.py"]
+CMD ["python3", "/app/hello.py"]
