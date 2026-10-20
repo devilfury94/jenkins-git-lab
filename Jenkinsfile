@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = 'jenkins-docker-app'
+        IMAGE_TAG = 'day27'
+    }
+    
     stages {
         stage('Workspace') {
             steps {
@@ -28,14 +33,14 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t jenkins-docker-app:day26 .'
+                sh 'docker build -t "$IMAGE_NAME:$IMAGE_TAG" .'
             }
         }
         
        stage('Docker Run Test') {
             steps {
-                sh 'docker run jenkins-docker-app:day26'
-                sh 'docker run jenkins-docker-app:day26 | grep -q "Hello from GitHub - version 2"'
+                sh 'docker run "$IMAGE_NAME:$IMAGE_TAG"'
+                sh 'docker run "$IMAGE_NAME:$IMAGE_TAG" | grep -q "Hello from GitHub - version 2"'
             }
        }
     }
