@@ -2,7 +2,7 @@ pipeline {
     agent any
 
    environment {
-        IMAGE_NAME = 'jenkins-docker-app:day27'
+        IMAGE_NAME = 'jenkins-docker-app'
         }
 
     parameters {
