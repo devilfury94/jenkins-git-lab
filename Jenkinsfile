@@ -1,10 +1,17 @@
 pipeline {
     agent any
 
-    environment {
+   environment {
         IMAGE_NAME = 'jenkins-docker-app'
-        IMAGE_TAG = 'day27'
-    }
+        }
+
+    parameters {
+        string(
+            name: 'IMAGE_TAG',
+            defaultValue: 'day27',
+            description: 'Docker image tag'
+            )
+        }
     
     stages {
         stage('Workspace') {
