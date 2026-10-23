@@ -62,7 +62,7 @@ stage('Credentials Audit') {
     steps {
         withCredentials([
             string(
-                credentialsId: 'devops-login-demo',
+                credentialsId: 'devops-token-demo',
                 variable: 'DEMO_TOKEN'
             ),
             usernamePassword(
