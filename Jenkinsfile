@@ -38,22 +38,24 @@ pipeline {
             }
         }
 
-        stage('Credential Check') {
+       stage('Login Credential Check') {
     steps {
         withCredentials([
-            string(
-                credentialsId: 'devops-token-demo',
-                variable: 'DEMO_TOKEN'
+            usernamePassword(
+                credentialsId: 'devops-login-demo',
+                usernameVariable: 'DEMO_USER',
+                passwordVariable: 'DEMO_PASS'
             )
         ]) {
             sh '''
                 set +x
-                test -n "$DEMO_TOKEN" && echo "Credential loaded"
+                test -n "$DEMO_USER" &&
+                test -n "$DEMO_PASS" &&
+                echo "Login credentials loaded"
             '''
         }
     }
 }
-
         stage('Docker Build') {
             steps {
                 sh 'docker build -t "$IMAGE_NAME:$IMAGE_TAG" .'
