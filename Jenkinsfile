@@ -38,6 +38,21 @@ pipeline {
             }
         }
 
+        stage('Credential Check') {
+    steps {
+        withCredentials([
+            string(
+                credentialsId: 'devops-token-demo',
+                variable: 'DEMO_TOKEN'
+            )
+        ]) {
+            sh '''
+                set +x
+                test -n "$DEMO_TOKEN" && echo "Credential loaded"
+            '''
+        }
+    }
+
         stage('Docker Build') {
             steps {
                 sh 'docker build -t "$IMAGE_NAME:$IMAGE_TAG" .'
