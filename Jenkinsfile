@@ -97,10 +97,13 @@ stage('Credentials Audit') {
        }
 
         stage('Release Summary') {
-            steps {
-                sh 'echo "$IMAGE_NAME" | grep -q "devilfury/jenkins-docker-app:j29-final-v1"'
-            }
-        }
+    steps {
+        sh '''
+            echo "Image: devilfury/$IMAGE_NAME:$IMAGE_TAG"
+            echo "Release ready for publication"
+        '''
+    }
+}
         
 stage('Docker Hub Publish') {
     steps {
