@@ -95,6 +95,35 @@ stage('Credentials Audit') {
                 sh 'docker run "$IMAGE_NAME:$IMAGE_TAG" | grep -q "Hello from GitHub - version 2"'
             }
        }
+        
+stage('Docker Hub Publish') {
+    steps {
+        withCredentials([
+            usernamePassword(
+                credentialsId: 'dockerhub-jenkins',
+                usernameVariable: 'DOCKER_USER',
+                passwordVariable: 'DOCKER_TOKEN'
+            )
+        ]) {
+            sh '''
+                set +x
+                set -eu
+
+                export DOCKER_CONFIG="$(mktemp -d)"
+                trap 'rm -rf "$DOCKER_CONFIG"' EXIT
+
+                printf '%s' "$DOCKER_TOKEN" |
+                    docker login -u "$DOCKER_USER" --password-stdin
+
+                docker tag "$IMAGE_NAME:$IMAGE_TAG" \
+                    "$DOCKER_USER/$IMAGE_NAME:$IMAGE_TAG"
+
+                docker push "$DOCKER_USER/$IMAGE_NAME:$IMAGE_TAG"
+            '''
+        }
+    }
+}
+
     }
 }
     
