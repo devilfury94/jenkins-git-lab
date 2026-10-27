@@ -92,7 +92,7 @@ stage('Credentials Audit') {
        stage('Docker Run Test') {
             steps {
                 sh 'docker run "$IMAGE_NAME:$IMAGE_TAG"'
-                sh 'docker run "$IMAGE_NAME:$IMAGE_TAG" | grep -q "Hello from GitHub - version 2"'
+                sh 'docker run "$IMAGE_NAME:$IMAGE_TAG" | grep -q "Hello from GitHub - version 3"'
             }
        }
         
