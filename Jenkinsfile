@@ -95,6 +95,12 @@ stage('Credentials Audit') {
                 sh 'docker run "$IMAGE_NAME:$IMAGE_TAG" | grep -q "Hello from GitHub - version 2"'
             }
        }
+
+        stage('Release Summary') {
+            steps {
+                sh 'echo "$IMAGE_NAME" | grep -q "jenkins-docker-app:j29-final-v1"'
+            }
+        }
         
 stage('Docker Hub Publish') {
     steps {
