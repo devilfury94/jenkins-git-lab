@@ -8,8 +8,18 @@ pipeline {
     parameters {
         string(
             name: 'IMAGE_TAG',
-            defaultValue: 'day27',
-            description: 'Docker image tag'
+            defaultValue: 'j30-final-v1',
+            description: 'docker image version'
+            )
+         string(
+            name: 'APP_VERSION',
+            defaultValue: 'j30-final-v1',
+            description: 'version printed by app.py'
+            )
+         choice(
+            name: 'APP_ENV',
+            choices: ['staging', 'production'],
+            description: 'Application environment'
             )
         }
     
@@ -20,9 +30,9 @@ pipeline {
             }
         }
 
-         stage('Test Hello') {
+         stage('Test App') {
             steps {
-                sh 'python3 hello.py | grep -q "Hello from GitHub - version 3"'
+                sh 'python3 app.py | grep -Fxq "DEVOPS FINAL | VERSION=$APP_VERSION | ENV=$APP_ENV"'
             }
         }
         
