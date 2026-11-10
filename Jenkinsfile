@@ -101,10 +101,11 @@ stage('Credentials Audit') {
         
        stage('Docker Run Test') {
             steps {
-                sh 'docker run "$IMAGE_NAME:$IMAGE_TAG"'
-                sh 'docker run "$IMAGE_NAME:$IMAGE_TAG" | grep -q "Hello from GitHub - version 3"'
+                sh 'docker run --rm -e APP_VERSION="$APP_VERSION" -e APP_ENV="$APP_ENV" "$IMAGE_NAME:$IMAGE_TAG"'
+
+                sh 'docker run --rm -e APP_VERSION="$APP_VERSION" -e APP_ENV="$APP_ENV" "$IMAGE_NAME:$IMAGE_TAG" | grep -Fxq "DEVOPS FINAL | VERSION=$APP_VERSION | ENV=$APP_ENV"'
             }
-       }
+        }
         
 stage('Docker Hub Publish') {
     steps {
